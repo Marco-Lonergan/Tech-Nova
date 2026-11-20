@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" role="img" aria-labelledby="title description">
+  <title id="title">Lumen Pro smart glasses</title>
+  <desc id="description">A pair of advanced mixed-reality glasses with transparent digital displays showing apps, music, and a virtual landscape.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#101c37"/>
+      <stop offset="1" stop-color="#26496f"/>
+    </linearGradient>
+    <linearGradient id="lens" x1="0" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#b7f4ff" stop-opacity=".8"/>
+      <stop offset=".45" stop-color="#4f9bd4" stop-opacity=".5"/>
+      <stop offset="1" stop-color="#182e55" stop-opacity=".82"/>
+    </linearGradient>
+    <linearGradient id="frame" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e7f2ff"/>
+      <stop offset=".45" stop-color="#6e89a8"/>
+      <stop offset="1" stop-color="#263b59"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="900" height="600" fill="url(#background)"/>
+  <circle cx="727" cy="112" r="118" fill="#6bd9ff" opacity=".1"/>
+  <circle cx="152" cy="491" r="172" fill="#a16bff" opacity=".1"/>
+  <path d="M0 462q180-99 355-10t350-15q99-45 195-2v165H0z" fill="#152843" opacity=".82"/>
+  <path d="M0 506q202-88 394-9t506-17v120H0z" fill="#101d36" opacity=".8"/>
+
+  <g transform="translate(0 8)" stroke-linejoin="round">
+    <path d="m166 213-88-46q-22-11-34 7l-8 13 119 89" fill="none" stroke="url(#frame)" stroke-width="24" stroke-linecap="round"/>
+    <path d="m734 212 90-48q19-10 31 8l8 13-118 91" fill="none" stroke="url(#frame)" stroke-width="24" stroke-linecap="round"/>
+    <path d="M143 210q11-28 43-31l221-15q23-2 26 24l-4 158q-1 67-59 81l-159 24q-53 8-66-43l-23-142q-4-31 21-56z" fill="url(#lens)" stroke="url(#frame)" stroke-width="18"/>
+    <path d="M485 188q4-26 27-24l202 15q32 3 43 31l20 56q8 20 3 43l-24 99q-12 51-65 43l-152-23q-58-9-59-81z" fill="url(#lens)" stroke="url(#frame)" stroke-width="18"/>
+    <path d="M427 208q29-32 58 0" fill="none" stroke="#d7efff" stroke-width="17" stroke-linecap="round"/>
+    <path d="m157 241 91-25m421-1 82 24" fill="none" stroke="#e4f6ff" stroke-width="5" opacity=".72"/>
+    <path d="M123 274q-16-4-25 8l-10 16 24 6m667-29q15-4 25 8l10 16-23 6" fill="none" stroke="#49daf7" stroke-width="9" stroke-linecap="round"/>
+  </g>
+
+  <g font-family="Arial, sans-serif">
+    <g filter="url(#glow)" fill="#d8fbff">
+      <circle cx="229" cy="261" r="8"/>
+      <circle cx="258" cy="261" r="8"/>
+      <circle cx="287" cy="261" r="8"/>
+    </g>
+    <text x="206" y="292" fill="#effcff" font-size="15" font-weight="700">LUMEN HOME</text>
+    <rect x="204" y="309" width="91" height="47" rx="9" fill="#c8f7ff" opacity=".19" stroke="#baf4ff" stroke-opacity=".72"/>
+    <path d="m220 341 12-15 11 10 14-18 25 23" fill="none" stroke="#a8f3ff" stroke-width="3"/>
+    <text x="206" y="379" fill="#d4f7ff" font-size="12">Mixed reality</text>
+    <rect x="314" y="305" width="97" height="72" rx="10" fill="#112d55" fill-opacity=".72" stroke="#84e8ff" stroke-opacity=".8"/>
+    <circle cx="337" cy="329" r="10" fill="#6be7ff"/>
+    <path d="m334 323 11 6-11 7z" fill="#15304b"/>
+    <text x="330" y="355" fill="#fff" font-size="12" font-weight="700">PLAY</text>
+    <text x="329" y="369" fill="#c4eaf7" font-size="9">Music &amp; media</text>
+    <g transform="translate(529 250)">
+      <rect width="139" height="40" rx="20" fill="#d9fbff" fill-opacity=".16" stroke="#b8f5ff" stroke-opacity=".78"/>
+      <circle cx="22" cy="20" r="9" fill="#76edff"/>
+      <path d="M20 15v10l8-5z" fill="#143554"/>
+      <text x="39" y="24" fill="#f3fdff" font-size="13">Your world</text>
+    </g>
+    <g transform="translate(541 311)">
+      <rect width="116" height="48" rx="11" fill="#10284b" fill-opacity=".74" stroke="#7eeaff" stroke-opacity=".8"/>
+      <path d="M16 33q13-20 27-7t25-8 33 4" fill="none" stroke="#86edff" stroke-width="3"/>
+      <text x="17" y="19" fill="#eaffff" font-size="10">LIVE OVERLAY</text>
+    </g>
+    <text x="545" y="387" fill="#d4f7ff" font-size="12">See-through view</text>
+  </g>
+
+  <g transform="translate(314 489)" font-family="Arial, sans-serif">
+    <rect width="272" height="48" rx="24" fill="#0b1730" fill-opacity=".72" stroke="#79dff5" stroke-opacity=".5"/>
+    <circle cx="25" cy="24" r="7" fill="#63e8ff" filter="url(#glow)"/>
+    <text x="44" y="29" fill="#edfaff" font-size="15" font-weight="700" letter-spacing="2">LUMEN PRO</text>
+  </g>
+</svg>

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" role="img" aria-labelledby="title description">
+  <title id="title">Stick-figure wheelchair rider sprite</title>
+  <desc id="description">A simple stick figure riding in a blue wheelchair, facing right.</desc>
+  <defs>
+    <linearGradient id="chair" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#83d9f4"/>
+      <stop offset="1" stop-color="#3899c4"/>
+    </linearGradient>
+    <linearGradient id="rim" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#52667c"/>
+      <stop offset="1" stop-color="#26384d"/>
+    </linearGradient>
+  </defs>
+
+  <ellipse cx="123" cy="163" rx="91" ry="8" fill="#204b3a" opacity=".18"/>
+  <g stroke="#526b80" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m117 110 24 37 27 1" fill="none" stroke="#9bb3c4" stroke-width="6"/>
+    <path d="m141 146 29 1 4 7h-38z" fill="#5a9fbd" stroke="#24364b" stroke-width="3"/>
+    <path d="M48 85V68q0-5 5-5h22" fill="none" stroke-width="7"/>
+    <path d="M57 83h47l15 13-9 22H69L51 105z" fill="url(#chair)" stroke="#24364b" stroke-width="3.5"/>
+    <path d="m69 117 49 1-3 10H72z" fill="#2d789f" stroke="#24364b" stroke-width="3"/>
+    <path d="M125 119a36 36 0 1 1-72 0 36 36 0 1 1 72 0z" fill="url(#rim)" stroke="#24364b" stroke-width="3"/>
+    <path d="M116 119a27 27 0 1 1-54 0 27 27 0 1 1 54 0z" fill="#d9edf3" stroke="#9bb3c4" stroke-width="2.5"/>
+    <path d="M108 119a19 19 0 1 1-38 0 19 19 0 1 1 38 0z" fill="none" stroke="#7ca0b2" stroke-width="2"/>
+    <circle cx="89" cy="119" r="5" fill="#526b80" stroke="none"/>
+    <path d="m128 113 17-22" fill="none" stroke-width="4"/>
+  </g>
+
+  <g fill="none" stroke="#26364a" stroke-linecap="round" stroke-linejoin="round" stroke-width="6">
+    <circle cx="75" cy="37" r="13" fill="#fff" stroke-width="5"/>
+    <path d="m75 51 9 32"/>
+    <path d="m79 61 24 8 55-8"/>
+    <path d="m80 62-16 20"/>
+    <path d="m84 83 30 12 28-1 18 9"/>
+  </g>
+  <circle cx="162" cy="61" r="4" fill="#26364a"/>
+</svg>

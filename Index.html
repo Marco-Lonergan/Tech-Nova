@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TechNova | Products</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="brand-lockup">
+            <img class="brand-logo" src="Images/TechNova-Mark.svg" alt="" aria-hidden="true">
+            <h1>TechNova</h1>
+        </div>
+        <div class="header-actions">
+            <form class="search-form" action="Index.html" method="get" role="search">
+                <label for="site-search" class="visually-hidden">Search TechNova products</label>
+                <input id="site-search" type="search" name="q" placeholder="Search TechNova products..." required>
+                <button type="submit">Search</button>
+                <button class="nova-trigger" type="button" aria-label="Ask Nova to find a page">Nova</button>
+            </form>
+            <button class="cart-trigger" type="button" aria-label="Open cart, 0 items">Cart (<span class="cart-count">0</span>)</button>
+        </div>
+    </header>
+    <nav aria-label="Main navigation">
+        <a href="Index.html" aria-current="page">All products</a>
+        <a href="Novas-Seat.html">Nova's Seat</a>
+        <a href="Smart-Glove.html">Smart Glove</a>
+        <a href="Nova-Pulse-Watch.html">Nova Pulse Watch</a>
+        <a href="Lumen-Pro.html">Lumen Pro</a>
+        <a href="Game.html">Nova Run Game</a>
+        <a href="#sustainability">Sustainability</a>
+        <a href="About-Us.html">About us</a>
+        <a href="Customer-Service.html">Customer Service</a>
+    </nav>
+    <main>
+        <h2>Technology with people in mind</h2>
+        <p class="page-intro">
+            TechNova explores how thoughtful technology could support greater access,
+            independence, and connection in everyday life. Browse the concepts below to learn
+            what each product is intended to do, how someone might use it, and what practical
+            considerations would matter in a real design.
+        </p>
+        <section class="product-grid" aria-label="TechNova products">
+            <article class="product-card" data-search="nova's seat wheelchair mobility accessibility disability independence stairs stair climbing tracked chair joystick powered assistive">
+                <img class="product-image" src="Images/StairPilot-Advanced.svg" alt="Illustration of a person in a modern powered wheelchair">
+                <div class="product-info">
+                    <h2>Nova's Seat</h2>
+                    <p>A powered wheelchair concept for everyday mobility, with supportive seating, joystick controls, and a stair-assist idea for compatible environments. Stair use would require a purpose-built, tested model and training.</p>
+                    <a class="product-link" href="Novas-Seat.html">View product</a>
+                    <button class="add-to-cart" type="button" data-product="Nova's Seat">Add to cart</button>
+                </div>
+            </article>
+            <article class="product-card" data-search="technova smart glove phone wearable display touch gestures voice calls messages directions smart home audio">
+                <img class="product-image" src="Images/TechNova%20(1).png" alt="Futuristic black smart glove with a small touch display">
+                <div class="product-info">
+                    <h2>TechNova Smart Glove</h2>
+                    <p>A wearable concept that brings phone-like tasks to the hand, using a small display, touch controls, gestures, and voice commands for calls, messages, directions, and more.</p>
+                    <a class="product-link" href="Smart-Glove.html">View product</a>
+                    <button class="add-to-cart" type="button" data-product="TechNova Smart Glove">Add to cart</button>
+                </div>
+            </article>
+            <article class="product-card" data-search="nova pulse projector watch smartwatch wrist apps tiktok instagram x voice assistant nova pulse heart rate pulse health battery">
+                <img class="product-image" src="Images/TechNova%20(2).png" alt="Concept smartwatch projecting its interface onto the wearer's wrist">
+                <div class="product-info">
+                    <h2>Nova Pulse Projector Watch</h2>
+                    <p>A wrist-worn projector concept with on-demand controls, a Nova voice assistant, and pulse and heart-rate trend tracking, designed to work alongside a compatible phone.</p>
+                    <a class="product-link" href="Nova-Pulse-Watch.html">View product</a>
+                    <button class="add-to-cart" type="button" data-product="Nova Pulse Projector Watch">Add to cart</button>
+                </div>
+            </article>
+            <article class="product-card" data-search="lumen pro glasses smart glasses vr mixed reality virtual reality social media games gaming music apps screen time temperature">
+                <img class="product-image" src="Images/Lumen-Pro.svg" alt="Illustration of Lumen Pro mixed-reality smart glasses">
+                <div class="product-info">
+                    <h2>Lumen Pro</h2>
+                    <p>Mixed-reality glasses concept that combines digital apps, games, and music with a view of the surrounding world, alongside more immersive personalized scenes.</p>
+                    <a class="product-link" href="Lumen-Pro.html">View product</a>
+                    <button class="add-to-cart" type="button" data-product="Lumen Pro">Add to cart</button>
+                </div>
+            </article>
+        </section>
+        <p id="search-results" class="page-intro" role="status" aria-live="polite" hidden></p>
+        <section class="sustainability" id="sustainability" aria-labelledby="sustainability-title">
+            <h2 id="sustainability-title">Designed with sustainability in mind</h2>
+            <p>
+                TechNova's products are concepts, and their materials have not been independently
+                verified. Our design goal is to make future versions more environmentally
+                responsible by choosing renewable and recycled materials where practical, while
+                keeping products durable, repairable, and useful for longer.
+            </p>
+            <ul>
+                <li>Explore recycled metals and plastics, responsibly sourced materials, and renewable or plant-based alternatives.</li>
+                <li>Design for repair, replaceable components, and longer product lifetimes to help reduce electronic waste.</li>
+                <li>Consider energy efficiency, recyclable packaging, and responsible end-of-life recycling.</li>
+            </ul>
+            <p class="sustainability-note">
+                These are design aims, not claims that current products are already made from
+                these materials or have a certified environmental impact. Actual benefits would
+                depend on sourcing, manufacturing, use, and recycling.
+            </p>
+        </section>
+    </main>
+    <script>
+        const searchParams = new URLSearchParams(window.location.search);
+        const requestedQuery = (searchParams.get("q") || "").trim();
+        const productCards = document.querySelectorAll(".product-grid .product-card");
+        const searchInput = document.getElementById("site-search");
+        const searchResults = document.getElementById("search-results");
+
+        if (requestedQuery) {
+            searchInput.value = requestedQuery;
+            const searchTerms = requestedQuery.toLocaleLowerCase().split(/\s+/);
+            const matchingProducts = [];
+
+            productCards.forEach((card) => {
+                const searchableText = `${card.textContent} ${card.dataset.search || ""}`.toLocaleLowerCase();
+                const matches = searchTerms.every((term) => searchableText.includes(term));
+                card.hidden = !matches;
+                if (matches) matchingProducts.push(card);
+            });
+
+            searchResults.hidden = false;
+            if (matchingProducts.length === 1) {
+                window.location.href = matchingProducts[0].querySelector(".product-link").href;
+            } else if (matchingProducts.length > 1) {
+                searchResults.textContent = `${matchingProducts.length} products match "${requestedQuery}". Choose a product below to open its page.`;
+            } else {
+                searchResults.textContent = `No TechNova products found for "${requestedQuery}". Try a product name or feature.`;
+            }
+        }
+    </script>
+    <script src="nova-navigation.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TechNova Smart Glove | TechNova</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="brand-lockup">
+            <img class="brand-logo" src="Images/TechNova-Mark.svg" alt="" aria-hidden="true">
+            <h1>TechNova</h1>
+        </div>
+        <div class="header-actions">
+            <form class="search-form" action="Index.html" method="get" role="search">
+                <label for="site-search" class="visually-hidden">Search TechNova products</label>
+                <input id="site-search" type="search" name="q" placeholder="Search TechNova products..." required>
+                <button type="submit">Search</button>
+                <button class="nova-trigger" type="button" aria-label="Ask Nova to find a page">Nova</button>
+            </form>
+            <button class="cart-trigger" type="button" aria-label="Open cart, 0 items">Cart (<span class="cart-count">0</span>)</button>
+        </div>
+    </header>
+    <nav aria-label="Main navigation">
+        <a href="Index.html">All products</a>
+        <a href="Novas-Seat.html">Nova's Seat</a>
+        <a href="Smart-Glove.html" aria-current="page">Smart Glove</a>
+        <a href="Nova-Pulse-Watch.html">Nova Pulse Watch</a>
+        <a href="Lumen-Pro.html">Lumen Pro</a>
+        <a href="Game.html">Nova Run Game</a>
+        <a href="Index.html#sustainability">Sustainability</a>
+        <a href="About-Us.html">About us</a>
+        <a href="Customer-Service.html">Customer Service</a>
+    </nav>
+    <main>
+        <a class="back-link" href="Index.html">← All products</a>
+        <article class="product-card" aria-labelledby="smart-glove-title">
+            <img class="product-image" src="Images/TechNova%20(1).png" alt="Futuristic black smart glove with a small touch display and illuminated sensors">
+            <div class="product-info">
+                <h2 id="smart-glove-title">TechNova Smart Glove</h2>
+                <p>
+                    The TechNova Smart Glove is a high-tech wearable concept intended to bring
+                    common phone functions onto a small display worn on the hand. It imagines
+                    combining touch input with gestures and voice so a user can choose the
+                    interaction that feels easiest for the task.
+                </p>
+                <h3>What you can do with it</h3>
+                <ul>
+                    <li>Check notifications, preview messages, and answer or manage calls through the glove's display and controls.</li>
+                    <li>Use voice commands for reminders, quick notes, or simple searches when speaking is convenient and appropriate.</li>
+                    <li>View directions at a glance and control compatible smart-home devices while moving around.</li>
+                    <li>Use configurable gestures to play or pause audio, move between screens, or trigger shortcuts.</li>
+                </ul>
+                <h3>Everyday use and design priorities</h3>
+                <p>
+                    A user might pair the glove with a phone, choose which notifications are
+                    useful, then use its display or voice assistant for short tasks without
+                    taking the phone out. A real version would need a comfortable fit, controls
+                    that work for different hand movements, and a way to use essential functions
+                    if the glove battery runs low.
+                </p>
+                <p class="product-note">
+                    This is a product concept. Calls, messages, voice control, directions, and
+                    smart-home access would require compatible hardware, services, permissions,
+                    and a network connection. Users should be able to review notification and
+                    voice-data privacy settings.
+                </p>
+                <button class="add-to-cart" type="button" data-product="TechNova Smart Glove">Add to demo cart</button>
+            </div>
+        </article>
+    </main>
+    <script src="nova-navigation.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lumen Pro | TechNova</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="brand-lockup">
+            <img class="brand-logo" src="Images/TechNova-Mark.svg" alt="" aria-hidden="true">
+            <h1>TechNova</h1>
+        </div>
+        <div class="header-actions">
+            <form class="search-form" action="Index.html" method="get" role="search">
+                <label for="site-search" class="visually-hidden">Search TechNova products</label>
+                <input id="site-search" type="search" name="q" placeholder="Search TechNova products..." required>
+                <button type="submit">Search</button>
+                <button class="nova-trigger" type="button" aria-label="Ask Nova to find a page">Nova</button>
+            </form>
+            <button class="cart-trigger" type="button" aria-label="Open cart, 0 items">Cart (<span class="cart-count">0</span>)</button>
+        </div>
+    </header>
+    <nav aria-label="Main navigation">
+        <a href="Index.html">All products</a>
+        <a href="Novas-Seat.html">Nova's Seat</a>
+        <a href="Smart-Glove.html">Smart Glove</a>
+        <a href="Nova-Pulse-Watch.html">Nova Pulse Watch</a>
+        <a href="Lumen-Pro.html" aria-current="page">Lumen Pro</a>
+        <a href="Game.html">Nova Run Game</a>
+        <a href="Index.html#sustainability">Sustainability</a>
+        <a href="About-Us.html">About us</a>
+        <a href="Customer-Service.html">Customer Service</a>
+    </nav>
+    <main>
+        <a class="back-link" href="Index.html">← All products</a>
+        <article class="product-card" aria-labelledby="lumen-pro-title">
+            <img class="product-image" src="Images/Lumen-Pro.svg" alt="Illustration of Lumen Pro mixed-reality smart glasses with digital displays">
+            <div class="product-info">
+                <h2 id="lumen-pro-title">Lumen Pro</h2>
+                <p>
+                    Lumen Pro is a mixed-reality glasses concept for bringing digital content
+                    into a wearable view. In a see-through mode, the wearer could keep sight of
+                    the surroundings while viewing selected overlays. In a more immersive mode,
+                    the glasses could create a virtual environment with scenes and themes
+                    personalized to the user's preferences.
+                </p>
+                <h3>Entertainment and everyday features</h3>
+                <ul>
+                    <li>Access compatible social media, video games, music, and other apps through a personal display.</li>
+                    <li>Use digital overlays while keeping the outside world visible, or switch to a more immersive virtual scene.</li>
+                    <li>Personalize virtual environments with themes and content based on interests and accessibility preferences.</li>
+                    <li>Set a session limit that pauses the visual experience when the chosen time limit is reached.</li>
+                    <li>Explore hands-free or simple controls so users can move between content without needing a separate handheld screen.</li>
+                </ul>
+                <h3>Comfort and responsible use</h3>
+                <p>
+                    The concept includes screen-time reminders and a pause at the user's chosen
+                    limit, plus temperature monitoring and heat-management safeguards. These
+                    features would need careful engineering and testing; users should still take
+                    breaks, remain aware of their surroundings, and avoid immersive content
+                    while walking near traffic, stairs, or other hazards.
+                </p>
+                <p class="product-note">
+                    Lumen Pro is a concept, not a verified device. App access depends on
+                    compatible services and connectivity. Screen-time and temperature
+                    protections would depend on final design and testing; stop using any wearable
+                    that feels hot or uncomfortable.
+                </p>
+                <button class="add-to-cart" type="button" data-product="Lumen Pro">Add to demo cart</button>
+            </div>
+        </article>
+    </main>
+    <script src="nova-navigation.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html>

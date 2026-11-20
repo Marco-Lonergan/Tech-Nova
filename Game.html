@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nova Run Game | TechNova</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="brand-lockup">
+            <img class="brand-logo" src="Images/TechNova-Mark.svg" alt="" aria-hidden="true">
+            <h1>TechNova</h1>
+        </div>
+        <div class="header-actions">
+            <form class="search-form" action="Index.html" method="get" role="search">
+                <label for="site-search" class="visually-hidden">Search TechNova products</label>
+                <input id="site-search" type="search" name="q" placeholder="Search TechNova products..." required>
+                <button type="submit">Search</button>
+                <button class="nova-trigger" type="button" aria-label="Ask Nova to find a page">Nova</button>
+            </form>
+            <button class="cart-trigger" type="button" aria-label="Open cart, 0 items">Cart (<span class="cart-count">0</span>)</button>
+        </div>
+    </header>
+    <nav aria-label="Main navigation">
+        <a href="Index.html">All products</a>
+        <a href="Novas-Seat.html">Nova's Seat</a>
+        <a href="Smart-Glove.html">Smart Glove</a>
+        <a href="Nova-Pulse-Watch.html">Nova Pulse Watch</a>
+        <a href="Lumen-Pro.html">Lumen Pro</a>
+        <a href="Game.html" aria-current="page">Nova Run Game</a>
+        <a href="Index.html#sustainability">Sustainability</a>
+        <a href="About-Us.html">About us</a>
+        <a href="Customer-Service.html">Customer Service</a>
+    </nav>
+    <main class="game-main">
+        <a class="back-link" href="Index.html">← All products</a>
+        <h2>Nova Run Game</h2>
+        <p class="page-intro">
+            Ride across a grassy landscape and avoid the spikes and poles. If you hit an
+            obstacle, your ride returns to the start. Use the arrow keys or hold the on-screen
+            controls. This is a visual game and does not control a real wheelchair.
+        </p>
+        <section class="game-panel" aria-label="Nova Run game">
+            <div class="game-hud">
+                <p id="game-status" role="status" aria-live="polite">Ready to ride</p>
+                <p>Distance: <span id="distance">0</span> m</p>
+                <p>Best: <span id="high-score">0</span> m</p>
+            </div>
+            <div class="game-upcoming" aria-label="Upcoming obstacles">
+                <strong>Up next</strong>
+                <ol id="upcoming-list"></ol>
+            </div>
+            <div class="game-stage" id="game-stage" aria-label="Grassy landscape game area">
+                <div class="game-sun" aria-hidden="true"></div>
+                <div class="game-cloud cloud-one" aria-hidden="true"></div>
+                <div class="game-cloud cloud-two" aria-hidden="true"></div>
+                <div class="game-hill hill-back" aria-hidden="true"></div>
+                <div class="game-hill hill-front" aria-hidden="true"></div>
+                <div class="game-ground" aria-hidden="true"></div>
+                <div class="game-obstacle game-spikes" data-distance="12" role="img" aria-label="Spikes"></div>
+                <div class="game-obstacle game-pole" data-distance="24" role="img" aria-label="Pole"></div>
+                <div class="game-obstacle game-spikes" data-distance="36" role="img" aria-label="Spikes"></div>
+                <div class="game-obstacle game-pole" data-distance="48" role="img" aria-label="Pole"></div>
+                <div class="game-obstacle game-spikes" data-distance="60" role="img" aria-label="Spikes"></div>
+                <div class="game-obstacle game-pole" data-distance="72" role="img" aria-label="Pole"></div>
+                <div class="game-character" id="game-character">
+                    <img
+                        src="Images/Wheelchair-Sprite.svg"
+                        alt="Illustrated rider in a blue wheelchair"
+                    >
+                </div>
+                <div class="game-flower flower-one" aria-hidden="true">✿</div>
+                <div class="game-flower flower-two" aria-hidden="true">✿</div>
+                <div class="game-flower flower-three" aria-hidden="true">✿</div>
+            </div>
+            <div class="game-controls">
+                <button class="game-button" id="start-button" type="button">Start ride</button>
+                <button class="game-button secondary" id="pause-button" type="button" disabled>Pause</button>
+                <button class="game-button secondary" id="reset-button" type="button">Reset</button>
+                <button class="game-button" id="jump-button" type="button">Jump</button>
+                <div class="movement-controls" aria-label="Movement controls">
+                    <button class="game-button direction-button" id="left-button" type="button" aria-label="Move left">←</button>
+                    <button class="game-button direction-button" id="right-button" type="button" aria-label="Move right">→</button>
+                </div>
+            </div>
+            <p class="game-help">Avoid the spikes and poles. Press ↑ or Space, or use Jump, to leap over them. A collision resets your position and distance. Use ← and → or A and D to move.</p>
+        </section>
+    </main>
+    <script>
+        const character = document.getElementById("game-character");
+        const stage = document.getElementById("game-stage");
+        const distanceDisplay = document.getElementById("distance");
+        const highScoreDisplay = document.getElementById("high-score");
+        const upcomingList = document.getElementById("upcoming-list");
+        const statusDisplay = document.getElementById("game-status");
+        const startButton = document.getElementById("start-button");
+        const pauseButton = document.getElementById("pause-button");
+        const resetButton = document.getElementById("reset-button");
+        const jumpButton = document.getElementById("jump-button");
+        const obstacles = document.querySelectorAll(".game-obstacle");
+        const heldDirections = new Set();
+        const maximumObstacleSpacing = 30;
+        const travelSpeed = 12;
+        const minimumObstacleGap = 10;
+        const highScoreStorageKey = "technova-nova-run-high-score-v1";
+        const savedHighScore = Number(localStorage.getItem(highScoreStorageKey));
+        let highScore = Number.isFinite(savedHighScore) && savedHighScore >= 0
+            ? savedHighScore
+            : 0;
+        let distance = 0;
+        let running = false;
+        let previousTime = 0;
+        let lastUpcomingDistance = -1;
+
+        function randomObstacleGap() {
+            if (Math.random() < 0.35) {
+                return minimumObstacleGap + Math.floor(Math.random() * 3);
+            }
+            return 14 + Math.floor(Math.random() * 9);
+        }
+
+        function setObstacleType(obstacle, isSpikes) {
+            obstacle.classList.toggle("game-spikes", isSpikes);
+            obstacle.classList.toggle("game-pole", !isSpikes);
+            obstacle.setAttribute("aria-label", isSpikes ? "Spikes" : "Pole");
+        }
+
+        function updateUpcoming() {
+            const currentDistance = Math.floor(distance);
+            if (currentDistance === lastUpcomingDistance) return;
+            lastUpcomingDistance = currentDistance;
+
+            const upcoming = Array.from(obstacles)
+                .sort((first, second) =>
+                    Number(first.dataset.distance) - Number(second.dataset.distance))
+                .filter((obstacle) => Number(obstacle.dataset.distance) >= distance)
+                .slice(0, 3);
+            upcomingList.replaceChildren();
+
+            upcoming.forEach((obstacle) => {
+                const obstacleDistance = Number(obstacle.dataset.distance);
+                const name = obstacle.classList.contains("game-spikes") ? "Spikes" : "Pole";
+                const item = document.createElement("li");
+                item.textContent = `${name} · ${Math.ceil(obstacleDistance - distance)} m`;
+                upcomingList.append(item);
+            });
+        }
+
+        function render() {
+            const obstacleSpacing = Math.min(
+                maximumObstacleSpacing,
+                Math.max(8, stage.clientWidth / 45)
+            );
+            const characterCollisionRight = stage.clientWidth * 0.08 + character.offsetWidth * 0.72;
+            stage.style.setProperty("--travel-offset", `${-distance * obstacleSpacing}px`);
+            distanceDisplay.textContent = Math.floor(distance).toString();
+            if (distance > highScore) {
+                highScore = distance;
+                localStorage.setItem(highScoreStorageKey, highScore.toString());
+            }
+            highScoreDisplay.textContent = Math.floor(highScore).toString();
+
+            obstacles.forEach((obstacle) => {
+                const collisionInset = obstacle.classList.contains("game-spikes")
+                    ? obstacle.offsetWidth * 0.1
+                    : 4;
+                const obstacleX = characterCollisionRight - collisionInset +
+                    (Number(obstacle.dataset.distance) - distance) * obstacleSpacing;
+                obstacle.style.left = `${obstacleX}px`;
+            });
+
+            const furthestObstacle = Array.from(obstacles).reduce((furthest, obstacle) => {
+                return Number(obstacle.dataset.distance) > furthest.distance
+                    ? {
+                        element: obstacle,
+                        distance: Number(obstacle.dataset.distance)
+                    }
+                    : furthest;
+            }, {
+                element: obstacles[0],
+                distance: Number(obstacles[0].dataset.distance)
+            });
+            let nextDistance = furthestObstacle.distance;
+
+            obstacles.forEach((obstacle) => {
+                if (obstacle.offsetLeft + obstacle.offsetWidth >= 0) return;
+
+                nextDistance += randomObstacleGap();
+                obstacle.dataset.distance = nextDistance.toString();
+                setObstacleType(obstacle, Math.random() < 0.5);
+            });
+
+            obstacles.forEach((obstacle) => {
+                const collisionInset = obstacle.classList.contains("game-spikes")
+                    ? obstacle.offsetWidth * 0.1
+                    : 4;
+                const obstacleX = characterCollisionRight - collisionInset +
+                    (Number(obstacle.dataset.distance) - distance) * obstacleSpacing;
+                obstacle.style.left = `${obstacleX}px`;
+            });
+            updateUpcoming();
+        }
+
+        function resetObstacles() {
+            let nextDistance = minimumObstacleGap + Math.floor(Math.random() * 9);
+            obstacles.forEach((obstacle, index) => {
+                if (index > 0) nextDistance += randomObstacleGap();
+                obstacle.dataset.distance = nextDistance.toString();
+                setObstacleType(obstacle, Math.random() < 0.5);
+            });
+        }
+
+        function jump() {
+            if (!running || character.classList.contains("is-jumping")) return;
+            character.classList.add("is-jumping");
+        }
+
+        character.addEventListener("animationend", (event) => {
+            if (event.animationName === "game-character-jump") {
+                character.classList.remove("is-jumping");
+            }
+        });
+
+        function resetAfterCollision() {
+            running = false;
+            pauseButton.disabled = true;
+            startButton.disabled = false;
+            heldDirections.clear();
+            character.classList.remove("is-jumping");
+            resetObstacles();
+            distance = 0;
+            previousTime = 0;
+            lastUpcomingDistance = -1;
+            render();
+            statusDisplay.textContent = "You hit an obstacle! Back to the start.";
+        }
+
+        function hasCollision() {
+            if (character.classList.contains("is-jumping")) return false;
+            const bounds = character.getBoundingClientRect();
+            const characterBounds = {
+                left: bounds.left + bounds.width * 0.2,
+                right: bounds.left + bounds.width * 0.72,
+                top: bounds.top + bounds.height * 0.48,
+                bottom: bounds.top + bounds.height * 0.93
+            };
+            return Array.from(obstacles).some((obstacle) => {
+                const bounds = obstacle.getBoundingClientRect();
+                const isSpike = obstacle.classList.contains("game-spikes");
+                const inset = isSpike ? bounds.width * 0.1 : 4;
+                const obstacleBounds = {
+                    left: bounds.left + inset,
+                    right: bounds.right - inset,
+                    top: bounds.top + (isSpike ? bounds.height * 0.45 : 0),
+                    bottom: bounds.bottom
+                };
+                return characterBounds.left < obstacleBounds.right &&
+                    characterBounds.right > obstacleBounds.left &&
+                    characterBounds.top < obstacleBounds.bottom &&
+                    characterBounds.bottom > obstacleBounds.top;
+            });
+        }
+
+        function setRunning(isRunning) {
+            running = isRunning;
+            pauseButton.disabled = !running;
+            startButton.disabled = running;
+            statusDisplay.textContent = running ? "Riding — use the arrows to travel" : "Ride paused";
+            if (running) {
+                previousTime = 0;
+                requestAnimationFrame(animate);
+            } else {
+                previousTime = 0;
+                heldDirections.clear();
+            }
+        }
+
+        function animate(timestamp) {
+            if (!running) return;
+
+            const elapsed = previousTime ? Math.min((timestamp - previousTime) / 1000, 0.05) : 0;
+            previousTime = timestamp;
+
+            if (heldDirections.has("right")) {
+                distance += elapsed * travelSpeed;
+            }
+            if (heldDirections.has("left")) {
+                distance = Math.max(0, distance - elapsed * travelSpeed);
+            }
+
+            render();
+            if (hasCollision()) {
+                resetAfterCollision();
+                return;
+            }
+            requestAnimationFrame(animate);
+        }
+
+        function bindDirectionButton(button, direction) {
+            button.addEventListener("pointerdown", (event) => {
+                event.preventDefault();
+                heldDirections.add(direction);
+                button.setPointerCapture(event.pointerId);
+            });
+            button.addEventListener("pointerup", () => heldDirections.delete(direction));
+            button.addEventListener("pointercancel", () => heldDirections.delete(direction));
+            button.addEventListener("lostpointercapture", () => heldDirections.delete(direction));
+        }
+
+        bindDirectionButton(document.getElementById("left-button"), "left");
+        bindDirectionButton(document.getElementById("right-button"), "right");
+
+        document.addEventListener("keydown", (event) => {
+            if (event.altKey || event.ctrlKey || event.metaKey) return;
+            if (event.target instanceof HTMLElement &&
+                (event.target.isContentEditable || event.target.matches("input, textarea, select"))) return;
+            const key = event.key.toLowerCase();
+            if (key === "enter" && !running) {
+                event.preventDefault();
+                setRunning(true);
+            } else if (!running) {
+                return;
+            } else if (key === "arrowup" || key === " ") {
+                event.preventDefault();
+                jump();
+            } else if (key === "arrowleft" || key === "a") {
+                event.preventDefault();
+                heldDirections.add("left");
+            } else if (key === "arrowright" || key === "d") {
+                event.preventDefault();
+                heldDirections.add("right");
+            }
+        });
+
+        document.addEventListener("keyup", (event) => {
+            const key = event.key.toLowerCase();
+            if (key === "arrowleft" || key === "a") heldDirections.delete("left");
+            if (key === "arrowright" || key === "d") heldDirections.delete("right");
+        });
+
+        startButton.addEventListener("click", () => setRunning(true));
+        pauseButton.addEventListener("click", () => setRunning(false));
+        jumpButton.addEventListener("click", jump);
+        resetButton.addEventListener("click", () => {
+            setRunning(false);
+            character.classList.remove("is-jumping");
+            resetObstacles();
+            distance = 0;
+            lastUpcomingDistance = -1;
+            statusDisplay.textContent = "Ready to ride";
+            render();
+        });
+
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden && running) setRunning(false);
+        });
+
+        window.addEventListener("resize", render);
+        resetObstacles();
+        render();
+    </script>
+    <script src="nova-navigation.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html>

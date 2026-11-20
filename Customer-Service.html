@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Customer Service | TechNova</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="brand-lockup">
+            <img class="brand-logo" src="Images/TechNova-Mark.svg" alt="" aria-hidden="true">
+            <h1>TechNova</h1>
+        </div>
+        <div class="header-actions">
+            <form class="search-form" action="Index.html" method="get" role="search">
+                <label for="site-search" class="visually-hidden">Search TechNova products</label>
+                <input id="site-search" type="search" name="q" placeholder="Search TechNova products..." required>
+                <button type="submit">Search</button>
+                <button class="nova-trigger" type="button" aria-label="Ask Nova to find a page">Nova</button>
+            </form>
+            <button class="cart-trigger" type="button" aria-label="Open cart, 0 items">Cart (<span class="cart-count">0</span>)</button>
+        </div>
+    </header>
+    <nav aria-label="Main navigation">
+        <a href="Index.html">All products</a>
+        <a href="Novas-Seat.html">Nova's Seat</a>
+        <a href="Smart-Glove.html">Smart Glove</a>
+        <a href="Nova-Pulse-Watch.html">Nova Pulse Watch</a>
+        <a href="Lumen-Pro.html">Lumen Pro</a>
+        <a href="Game.html">Nova Run Game</a>
+        <a href="Index.html#sustainability">Sustainability</a>
+        <a href="About-Us.html">About us</a>
+        <a href="Customer-Service.html" aria-current="page">Customer Service</a>
+    </nav>
+    <main>
+        <a class="back-link" href="Index.html">← All products</a>
+        <h2>Customer Service</h2>
+        <p class="page-intro">
+            Find basic troubleshooting ideas for TechNova product concepts, or ask Nova for a
+            quick pointer. These concepts are not tested consumer devices, so use the
+            manufacturer's instructions and qualified support for any real product.
+        </p>
+
+        <section class="support-callout" aria-labelledby="contact-title">
+            <div>
+                <h3 id="contact-title">Need to speak to someone?</h3>
+                <p>This is a fictional example number for the website design and is not connected to TechNova support.</p>
+            </div>
+            <p class="fake-phone" aria-label="Fictional phone number, not active">1-800-555-0199 <span>FAKE · NOT ACTIVE</span></p>
+        </section>
+
+        <section class="support-section" aria-labelledby="troubleshooting-title">
+            <h2 id="troubleshooting-title">Common product issues</h2>
+            <div class="support-faq">
+                <details>
+                    <summary>Nova's Seat: the chair will not move or respond</summary>
+                    <p>Stop in a safe place and check the power and joystick only as described in the specific device manual. Do not force the controls or attempt stairs. If it remains unresponsive, switch it off if safe to do so and contact the device supplier or a qualified mobility technician.</p>
+                </details>
+                <details>
+                    <summary>Nova's Seat: battery or charging problem</summary>
+                    <p>Use only the charger approved for that chair and inspect the plug and cable for visible damage. Do not use damaged charging equipment or open the battery housing. If the battery is unusually hot, swollen, leaking, or smells unusual, stop charging, keep away from it, and seek qualified service.</p>
+                </details>
+                <details>
+                    <summary>Smart Glove: it will not pair or the display is blank</summary>
+                    <p>Confirm the glove and companion phone are charged, restart Bluetooth on the phone, and follow the device's pairing instructions. Keep the glove dry unless its instructions say otherwise. If it gets unusually hot or the battery looks damaged, stop using and charging it.</p>
+                </details>
+                <details>
+                    <summary>Nova Pulse Watch: projection or phone connection is not working</summary>
+                    <p>Check that projection is enabled, the surface and room lighting suit the device, and Bluetooth is on for pairing. Restart the watch and phone if needed. Pulse readings in this concept are informational only, not medical measurements; do not use them to diagnose a condition or delay medical care.</p>
+                </details>
+                <details>
+                    <summary>Lumen Pro: the image is blurry or causes discomfort</summary>
+                    <p>Pause the experience, remove the glasses, and rest your eyes. Follow the fit and focus guidance for the specific device. Do not use immersive glasses while driving or moving through hazards. Stop use if discomfort continues and seek appropriate support.</p>
+                </details>
+                <details>
+                    <summary>A product is overheating, damaged, or behaving unexpectedly</summary>
+                    <p>Stop using it. If safe, power it down and disconnect it from charging. Do not open the product or try to repair batteries yourself. Keep damaged or unusually hot devices away from people and flammable materials, and contact the product supplier or a qualified repair professional.</p>
+                </details>
+            </div>
+        </section>
+
+        <section class="nova-support" aria-labelledby="nova-title">
+            <div class="nova-heading">
+                <span class="nova-avatar" aria-hidden="true">N</span>
+                <div>
+                    <h2 id="nova-title">Ask Nova</h2>
+                    <p>TechNova's product help assistant</p>
+                </div>
+            </div>
+            <p class="nova-disclosure">
+                Nova is a simple on-page demo assistant using built-in troubleshooting tips.
+                It is not connected to a live AI service, does not send your messages anywhere,
+                and cannot diagnose or repair a device. Please do not share personal or
+                sensitive information.
+            </p>
+            <div class="nova-messages" id="nova-messages" role="log" aria-live="polite" aria-relevant="additions">
+                <p class="nova-message assistant-message"><strong>Nova:</strong> Hi! Tell me which product you need help with and what is happening. For urgent safety concerns, stop using the device and contact qualified support.</p>
+            </div>
+            <form class="nova-chat-form" id="nova-chat-form">
+                <label class="visually-hidden" for="nova-question">Ask Nova a product question</label>
+                <input id="nova-question" name="question" type="text" maxlength="240" placeholder="e.g. My Smart Glove will not pair" required>
+                <button class="game-button" type="submit">Ask Nova</button>
+            </form>
+        </section>
+    </main>
+    <script>
+        const chatForm = document.getElementById("nova-chat-form");
+        const questionInput = document.getElementById("nova-question");
+        const messages = document.getElementById("nova-messages");
+
+        function getNovaReply(question) {
+            const text = question.toLocaleLowerCase();
+            if (text.includes("wheelchair") || text.includes("nova's seat") || text.includes("nova seat") || text.includes("chair")) {
+                return "For Nova's Seat, stop in a safe place. Check power and controls only as described in the device manual. Do not attempt stairs if it is unresponsive. If the issue continues, contact the supplier or a qualified mobility technician.";
+            }
+            if (text.includes("glove")) {
+                return "For the Smart Glove, check its charge, restart Bluetooth on the companion phone, and follow the pairing instructions. Stop using or charging it if it becomes unusually hot or appears damaged.";
+            }
+            if (text.includes("watch") || text.includes("pulse") || text.includes("project")) {
+                return "For Nova Pulse, check the projection setting and Bluetooth pairing, then restart the watch and phone. Pulse readings are informational concept features, not medical measurements or a diagnosis.";
+            }
+            if (text.includes("lumen") || text.includes("glasses") || text.includes("blurry") || text.includes("eye")) {
+                return "For Lumen Pro, pause and remove the glasses if the image is blurry or uncomfortable, then rest your eyes. Do not use immersive glasses while driving or around hazards. Seek support if discomfort continues.";
+            }
+            if (text.includes("battery") || text.includes("charge") || text.includes("hot") || text.includes("overheat")) {
+                return "If a device or battery is unusually hot, swollen, leaking, or damaged, stop using and charging it. Do not open it or attempt a battery repair; contact the supplier or a qualified repair professional.";
+            }
+            return "I can offer basic tips for Nova's Seat, Smart Glove, Nova Pulse Watch, or Lumen Pro. Tell me the product name and issue, or check the common product issues above. For device safety, follow its manual and contact qualified support.";
+        }
+
+        chatForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const question = questionInput.value.trim();
+            if (!question) return;
+
+            const userMessage = document.createElement("p");
+            userMessage.className = "nova-message user-message";
+            userMessage.textContent = `You: ${question}`;
+            messages.append(userMessage);
+
+            const assistantMessage = document.createElement("p");
+            assistantMessage.className = "nova-message assistant-message";
+            const label = document.createElement("strong");
+            label.textContent = "Nova: ";
+            assistantMessage.append(label, document.createTextNode(getNovaReply(question)));
+            messages.append(assistantMessage);
+
+            questionInput.value = "";
+            messages.scrollTop = messages.scrollHeight;
+            questionInput.focus();
+        });
+    </script>
+    <script src="nova-navigation.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html>
